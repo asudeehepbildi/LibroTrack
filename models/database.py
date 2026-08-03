@@ -5,7 +5,7 @@ import yaml
 import os
 from typing import List, Tuple, Any
 from models.models import Kitap
-from exceptions import (
+from models.exceptions import (
     KitapBulunamadiError,
     ISBNZatenMevcutError,
     VeritabaniHatasi,
