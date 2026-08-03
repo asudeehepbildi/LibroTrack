@@ -5,10 +5,9 @@ from models.exceptions import VeritabaniHatasi, KitapBulunamadiError, ISBNZatenM
     RaporlamaHatasi
 from datetime import date
 
-
 class KitapController:
-    def __init__(self):
-        self.db = VeritabaniYoneticisi()
+    def __init__(self, db=None):
+        self.db = db if db else VeritabaniYoneticisi()
         self.kutuphane_servisi = Kutuphane(self.db)
 
     # --- Veri Getirme İşlemleri ---
@@ -50,22 +49,16 @@ class KitapController:
     def kitap_ekle(self, isbn, baslik, yazar, tur, sayfa_str, kullanici):
         if not isbn or not baslik or not yazar or tur == "Tür Seçiniz" or not sayfa_str or kullanici == "Kullanıcı Seçiniz":
             return False, "Tüm alanlar zorunludur ve seçimler yapılmalıdır."
-        if not isbn.isdigit():
-            return False, "ISBN sadece rakamlardan oluşmalıdır."
-        if len(isbn) not in [10, 13]:
-            return False, "ISBN numarası 10 veya 13 haneli olmalıdır."
-        if yazar.isdigit():
-            return False, "Yazar ismi sadece rakamlardan oluşamaz, harf içermelidir."
-
+        if not isbn.isdigit(): return False, "ISBN sadece rakamlardan oluşmalıdır."
+        if len(isbn) not in [10, 13]: return False, "ISBN numarası 10 veya 13 haneli olmalıdır."
+        if yazar.isdigit(): return False, "Yazar ismi sadece rakamlardan oluşamaz, harf içermelidir."
         try:
             sayfa = int(sayfa_str)
             k = Kitap(isbn=isbn, baslik=baslik, yazar=yazar, tur=tur, sayfa_sayisi=sayfa, kullanici_adi=kullanici)
             self.kutuphane_servisi.yeni_kitap_islem(k)
             return True, "Eklendi!"
-        except ValueError:
-            return False, "Sayfa sayısı pozitif bir tamsayı olmalıdır."
-        except (VeritabaniHatasi, ISBNZatenMevcutError) as e:
-            return False, str(e)
+        except ValueError: return False, "Sayfa sayısı pozitif bir tamsayı olmalıdır."
+        except (VeritabaniHatasi, ISBNZatenMevcutError) as e: return False, str(e)
 
     def kitap_guncelle(self, isbn, kullanici_adi, tur, durum, sayfa_raw):
         try:
