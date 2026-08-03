@@ -1,0 +1,7 @@
+veritabanı:
+  yol: "data/librotrack.db"
+
+loglama:
+  seviye_konsol: "INFO"    # Terminalde görünecek alt sınır
+  seviye_dosya: "DEBUG"     # Log dosyasına yazılacak alt sınır
+  dosya: "librotrack.log"

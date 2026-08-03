@@ -1,0 +1,7 @@
+temiz_ortam/
+__pycache__/
+*.db
+*.log
+*.png
+.vscode/
+data/
