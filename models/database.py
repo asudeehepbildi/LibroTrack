@@ -61,6 +61,7 @@ class VeritabaniYoneticisi:
         self.db_yolu: str = config.get("veritabanı", {}).get(
             "yol", "data/librotrack.db"
         )
+        self.connection = None
 
         # YENİ EKLENEN PROFESYONEL OPTİMİZASYON:
         # Veritabanı klasörü yoksa (örneğin .exe ilk kez çalışıyorsa) otomatik oluştur.
@@ -458,3 +459,9 @@ class VeritabaniYoneticisi:
                     )
         except sqlite3.Error as e:
             raise VeritabaniHatasi(f"CSV dışa aktarım hatası: {e}")
+
+    def close(self):
+        # 'hasattr' ile önce bu özelliğin var olup olmadığını kontrol ediyoruz
+        # Varsa ve doluysa kapatıyoruz
+        if hasattr(self, 'connection') and self.connection:
+            self.connection.close()
