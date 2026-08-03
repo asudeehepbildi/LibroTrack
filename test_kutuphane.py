@@ -1,18 +1,14 @@
 import pytest
-import sqlite3
-from models import Kitap, Kullanici, Kutuphane
-from database import VeritabaniYoneticisi
-from exceptions import ISBNZatenMevcutError, KitapBulunamadiError
+from models.models import Kitap
+from models.database import VeritabaniYoneticisi
+from models.exceptions import ISBNZatenMevcutError, KitapBulunamadiError
 import os
 import uuid
-import tempfile
 import gc
 from unittest.mock import patch
-from raporlama import istatistikleri_olustur
-from unittest.mock import patch, MagicMock
 import pandas as pd
-from raporlama import istatistikleri_olustur
-from exceptions import RaporlamaHatasi
+from services.raporlama import istatistikleri_olustur
+from models.exceptions import RaporlamaHatasi
 
 
 @pytest.fixture
@@ -195,7 +191,7 @@ def test_15_raporlama_dosya_mevcutsa_cik():
 
 def test_16_hatali_veritabani_baglantisi():
     """Hatalı veritabanı yolu verildiğinde sistemin hata verip vermediğini kontrol eder."""
-    from database import VeritabaniYoneticisi
+    from models.database import VeritabaniYoneticisi
 
     # Geçersiz bir dosya yolu vererek bir hatayı tetikliyoruz
     db = VeritabaniYoneticisi()

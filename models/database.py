@@ -4,18 +4,17 @@ import pandas as pd
 import yaml
 import os
 from typing import List, Tuple, Any
-from models import Kitap
+from models.models import Kitap
 from exceptions import (
     KitapBulunamadiError,
     ISBNZatenMevcutError,
     VeritabaniHatasi,
     YapilandirmaHatasi,
-    SistemErisimHatasi,
 )
 
 # Yapılandırma (config) yükleme bloğu
 try:
-    with open("config.yaml", "r", encoding="utf-8") as f:
+    with open("../config.yaml", "r", encoding="utf-8") as f:
         # safe_load: YAML içindeki tehlikeli Python komutlarının çalıştırılmasını engeller, güvenli okuma yapar.
         config = yaml.safe_load(f)
 except FileNotFoundError:

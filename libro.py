@@ -3,16 +3,13 @@ import logging
 import sys
 import requests
 from datetime import date
-from models import Kitap
-from database import VeritabaniYoneticisi
-from exceptions import (
-    KitapBulunamadiError,
-    ISBNZatenMevcutError,
+from models.models import Kitap
+from models.database import VeritabaniYoneticisi
+from models.exceptions import (
     VeritabaniHatasi,
     YapilandirmaHatasi,
     SistemErisimHatasi,
     LibroTrackError,
-    GirdiDogrulamaError,
 )
 
 logger = logging.getLogger()
@@ -242,7 +239,7 @@ def main() -> None:
             print(f"Toplam Kitap Sayısı: {ozet['toplam']}")
             print(f"Okunan Kitap Sayısı: {ozet['okunan']}")
             print(f"Tamamlanan Toplam Sayfa: {ozet['sayfa']}")
-            from raporlama import istatistikleri_olustur
+            from services.raporlama import istatistikleri_olustur
 
             istatistikleri_olustur(aktif_profil)
             sys.exit(0)

@@ -2,13 +2,12 @@ import sqlite3
 import matplotlib.pyplot as plt
 import pandas as pd
 import yaml
-import logging
 import os
-from exceptions import VeritabaniHatasi, RaporlamaHatasi
+from models.exceptions import VeritabaniHatasi, RaporlamaHatasi
 
 # YAML dosyasını okuma ve veritabanı yolunu belirleme
 try:
-    with open("config.yaml", "r", encoding="utf-8") as f:
+    with open("../config.yaml", "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
     # config.yaml dosyasındaki 'veritabanı' anahtarına göre yolu alıyoruz
     DB_YOLU = config.get("veritabanı", {}).get("yol", "data/librotrack.db")
