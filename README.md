@@ -123,4 +123,4 @@ $kitaplar = @(
     @{isbn="9789750801754"; baslik="Puslu Kıtalar Atlası"; yazar="İhsan Oktay Anar"; tur="Roman"; sayfa=256},
     @{isbn="9789750719370"; baslik="Dava"; yazar="Franz Kafka"; tur="Roman"; sayfa=288}
 )
-foreach ($k in $kitaplar) { python libro.py kitap-ekle --isbn$k.isbn --baslik $k.baslik --yazar$k.yazar --tur $k.tur --sayfa-sayisi$k.sayfa }
+foreach ($k in $kitaplar) { python libro.py kitap-ekle --isbn $k.isbn --baslik $k.baslik --yazar $k.yazar --tur $k.tur --sayfa-sayisi $k.sayfa }
