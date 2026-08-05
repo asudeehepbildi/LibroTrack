@@ -124,3 +124,15 @@ $kitaplar = @(
     @{isbn="9789750719370"; baslik="Dava"; yazar="Franz Kafka"; tur="Roman"; sayfa=288}
 )
 foreach ($k in $kitaplar) { python libro.py kitap-ekle --isbn $($k.isbn) --baslik "$($k.baslik)" --yazar "$($k.yazar)" --tur "$($k.tur)" --sayfa-sayisi $($k.sayfa) }
+```
+---
+
+## 🛠️ Proje Geliştirme, Optimizasyon ve Mimari Süreçler Özeti
+
+LibroTrack projesinin geliştirme yaşam döngüsü boyunca kod kalitesini artırmak, performansı optimize etmek ve sürdürülebilirliği sağlamak amacıyla yapılan ana çalışmalar şunlardır:
+
+* **Mimari Dönüşüm (MVC):** Proje monolitik yapıdan ayrılarak `Models`, `Views`, `Controllers` ve `Services` katmanlarından oluşan Model-View-Controller (MVC) mimarisine (`refactor/mvc-mimari` dalında) taşınmıştır. 
+* **
+* **Performans Optimizasyonu (cProfile):** cProfile ile yapılan analizde Matplotlib'in grafik çizerken ve Tkinter'ın arayüzü yenilerken sistemi çok yavaşlattığı görüldü; bu yüzden grafiklerin her seferinde baştan çizilmesi engellendi ve arayüz pencereleri silinip yeniden oluşturulmak yerine gizlenip açılacak şekilde optimize edilerek programın çalışma süresi 144 saniyeden 99 saniyeye düşürüldü.
+* **
+* **Birim Testleri ve Kapsam (`pytest-cov`):** Projenin ilk aşamasında kodların ne kadarının test edildiğini ölçtüğümüzde kapsam oranı %52 gibi düşük bir seviyedeydi. Daha sonra proje MVC mimarisine geçirilip, eksik kalan kısımlar ve yeni eklenen modüller için yeni birim testleri yazıldı. Bu testlerin içine harici servisleri ve grafik işlemlerini taklit eden (mock) yöntemler eklendi. Yapılan bu geliştirmeler ve eklenen testler sayesinde, toplam 41 birim test başarılı bir şekilde çalıştırıldı ve kodun test edilme oranı %80 seviyesine çıkarıldı.
