@@ -81,7 +81,7 @@ class LibroTrackGUI(ctk.CTk):
         self.geometry("1350x700")
         self.title("LibroTrack Yönetim Paneli")
 
-        # grid_columnconfigure(1, weight=1): İkinci sütunun (ana içerik alanı) ekran büyüdükçe esnemesini (responsive) sağlar.
+        # grid_columnconfigure(1, weight=1): İkinci sütunun (ana içerik alanı) ekran büyüdükçe esnemesini sağlar.
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
@@ -91,7 +91,7 @@ class LibroTrackGUI(ctk.CTk):
         )
         self.sidebar.grid(
             row=0, column=0, sticky="nsew"
-        )  # sticky="nsew": Frame'in her yöne (North, South, East, West) genişlemesini sağlar.
+        )  # sticky="nsew": Frame'in her yöne genişlemesini sağlar.
 
         ctk.CTkLabel(
             self.sidebar,
@@ -292,7 +292,7 @@ class LibroTrackGUI(ctk.CTk):
                 else self.user_combo._values[0]
             )
 
-        # DEĞİŞİKLİK: 2 farklı buton eklendi (Hızlı gösterim ve Zorunlu güncelleme)
+
         ctk.CTkButton(
             c,
             text="Raporu Göster (Hızlı)",
@@ -316,7 +316,6 @@ class LibroTrackGUI(ctk.CTk):
             self.handle_error("Lütfen bir kullanıcı seçin.")
             return
         try:
-            # DEĞİŞİKLİK: Parametre aktarıldı
             istatistikleri_olustur(k_adi, force_update=force_update)
             self.clear_main()
             report_frame = ctk.CTkScrollableFrame(
@@ -416,7 +415,7 @@ class LibroTrackGUI(ctk.CTk):
         self.focus()
 
     def tabloyu_doldur(self):
-        # DEĞİŞİKLİK: Döngü ile çocuk elemanları tek tek silmek yerine, tüm tabloyu yok edip anında yeniden yaratıyoruz. (Optimizasyon)
+        #  Döngü ile çocuk elemanları tek tek silmek yerine, tüm tabloyu yok edip anında yeniden yaratıyoruz. (Optimizasyon)
         self.table_area.destroy()
         self.table_area = ctk.CTkScrollableFrame(self.main_frame, fg_color="white")
         self.table_area.pack(fill="both", expand=True, padx=10, pady=10)

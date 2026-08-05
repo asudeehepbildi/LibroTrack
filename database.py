@@ -62,8 +62,6 @@ class VeritabaniYoneticisi:
         self.db_yolu: str = config.get("veritabanı", {}).get(
             "yol", "data/librotrack.db"
         )
-
-        # YENİ EKLENEN PROFESYONEL OPTİMİZASYON:
         # Veritabanı klasörü yoksa (örneğin .exe ilk kez çalışıyorsa) otomatik oluştur.
         klasor = os.path.dirname(self.db_yolu)
         if klasor and not os.path.exists(klasor):
